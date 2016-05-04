@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.params=
+comment0.target=SpaceSystem()
+comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ System\r\n
+comment1.params=mass
+comment1.target=void\ setMass(double)
+comment1.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \ \ \ that\ describes\ the\ operation\ of\ the\ method\r\n\r\n\ @pre\ \ \ \ \ \ \ \ preconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ assumes\ about\ the\ method's\ parameters\ and\ class's\ state)\r\n\ @post\ \ \ \ postconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ guarantees\ upon\ completion)\r\n\ @param\ \ \ \ y\ \ \ \ description\ of\ parameter\ y\r\n\ @return\ \ \ \ description\ of\ the\ return\ value\r\n
+comment2.params=radius
+comment2.target=void\ setRadius(double)
+comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \ that\ describes\ the\ operation\ of\ the\ method\r\n\r\n\ @pre\ \ \ \ \ preconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ (what\ the\ method\ assumes\ about\ the\ method's\ parameters\ and\ class's\ state)\r\n\ @post\ \ \ \ postconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ (what\ the\ method\ guarantees\ upon\ completion)\r\n\ @param\ \ \ y\ \ \ description\ of\ parameter\ y\r\n\ @return\ \ description\ of\ the\ return\ value\r\n
+comment3.params=x\ y
+comment3.target=void\ move(double,\ double)
+comment4.params=g2
+comment4.target=void\ draw(java.awt.Graphics2D)
+comment5.params=
+comment5.target=double\ getMass()
+comment6.params=
+comment6.target=double\ getRadius()
+comment7.params=
+comment7.target=java.awt.geom.Point2D.Double\ getCenter()
+numComments=8
