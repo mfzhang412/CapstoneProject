@@ -21,9 +21,11 @@ public class SpaceSystem
     /**
      * Default constructor for objects of class System
      */
-    public SpaceSystem()
+    public SpaceSystem(double m, double r, double x, double y)
     {
-
+        this.mass = m;
+        this.radius = r;
+        center = new Point2D.Double(x, y);
     }
 
     /**

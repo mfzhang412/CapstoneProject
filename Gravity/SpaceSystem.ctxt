@@ -1,6 +1,6 @@
 #BlueJ class context
-comment0.params=
-comment0.target=SpaceSystem()
+comment0.params=m\ r\ x\ y
+comment0.target=SpaceSystem(double,\ double,\ double,\ double)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ System\r\n
 comment1.params=mass
 comment1.target=void\ setMass(double)

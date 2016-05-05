@@ -20,17 +20,21 @@ public class DrawingPanel extends JPanel
 {
     /** description of instance variable x (add comment for each instance variable) */
     private ArrayList<SpaceSystem> list;
-    
 
     /**
      * Default constructor for objects of class DrawingPanel
      */
     public DrawingPanel()
     {
-        // initialise instance variables
-        x = 0;
+        this.setBackground(Color.BLACK);
+        list = new ArrayList<SpaceSystem>();
     }
-
+    
+    public void addSystem(SpaceSystem s)
+    {
+        list.add(s);
+    }
+    
     /**
      * An example of a method - replace this comment with your own
      *    that describes the operation of the method
@@ -42,10 +46,13 @@ public class DrawingPanel extends JPanel
      * @param    y    description of parameter y
      * @return    description of the return value
      */
-    public int sampleMethod(int y)
+    public void paintComponent(Graphics g)
     {
-        // put your code here
-        return x+y;
+        super.paintComponent(g);
+        for(SpaceSystem sys : list)
+        {
+            sys.draw((Graphics2D) g);
+        }
     }
 
 }
