@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.Scanner;
+import java.awt.Dimension;
 
 /**
  * Write a description of class ControlPanel here.
@@ -57,9 +58,14 @@ public class ControlPanel extends JPanel
         
         massOption.addActionListener(new MassListener());
         radiusOption.addActionListener(new RadiusListener());
-        xLi.addActionListener(new XListener());
-        yLi.addActionlistener(new YListener());
-        ok.addActionListener(new SetListener());
+        xCoor.addActionListener(new XListener());
+        yCoor.addActionListener(new YListener());
+        set.addActionListener(new SetListener());
+    }
+    
+    public Dimension getPreferredSize()
+    {
+        return (new Dimension(200, 600));
     }
 
     public class MassListener implements ActionListener
@@ -110,7 +116,10 @@ public class ControlPanel extends JPanel
     {
         public void actionPerformed(ActionEvent e)
         {
-            s = new SpaceSystem(mass, radius, x, y);
+            System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate): ");
+            Scanner scan = new Scanner(System.in);
+            String[] param = (scan.next()).split(" ");
+            s = new SpaceSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]));
             panel.addSystem(s);
         }
     }

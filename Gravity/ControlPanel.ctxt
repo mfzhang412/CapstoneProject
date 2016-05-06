@@ -2,4 +2,6 @@
 comment0.params=panel
 comment0.target=ControlPanel(DrawingPanel)
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ ControlPanel\r\n
-numComments=1
+comment1.params=
+comment1.target=java.awt.Dimension\ getPreferredSize()
+numComments=2
