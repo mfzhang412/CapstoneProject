@@ -2,8 +2,8 @@
 comment0.params=
 comment0.target=DrawingPanel()
 comment0.text=\r\n\ Default\ constructor\ for\ objects\ of\ class\ DrawingPanel\r\n
-comment1.params=s
-comment1.target=void\ addSystem(SpaceSystem)
+comment1.params=m\ r\ x\ y\ v
+comment1.target=void\ addSystem(double,\ double,\ double,\ double,\ double)
 comment2.params=g
 comment2.target=void\ paintComponent(java.awt.Graphics)
 comment2.text=\r\n\ An\ example\ of\ a\ method\ -\ replace\ this\ comment\ with\ your\ own\r\n\ \ \ \ that\ describes\ the\ operation\ of\ the\ method\r\n\r\n\ @pre\ \ \ \ \ \ \ \ preconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ assumes\ about\ the\ method's\ parameters\ and\ class's\ state)\r\n\ @post\ \ \ \ postconditions\ for\ the\ method\r\n\ \ \ \ \ \ \ \ \ \ \ \ (what\ the\ method\ guarantees\ upon\ completion)\r\n\ @param\ \ \ \ y\ \ \ \ description\ of\ parameter\ y\r\n\ @return\ \ \ \ description\ of\ the\ return\ value\r\n

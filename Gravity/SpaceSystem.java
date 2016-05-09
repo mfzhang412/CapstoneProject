@@ -3,6 +3,7 @@ import java.awt.geom.Ellipse2D;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 /**
  * Write a description of class System here.
@@ -16,45 +17,27 @@ public class SpaceSystem
     private double mass;
     private double radius;
     private Point2D.Double center;
+    private double velocity;
     private Ellipse2D.Double planet;
+    private DrawingPanel panel;
     
     /**
      * Default constructor for objects of class System
      */
-    public SpaceSystem(double m, double r, double x, double y)
+    public SpaceSystem(double m, double r, double x, double y, double v, DrawingPanel p)
     {
         this.mass = m;
         this.radius = r;
-        center = new Point2D.Double(x, y);
+        this.center = new Point2D.Double(x, y);
+        this.velocity = v;
+        this.panel = p;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *    that describes the operation of the method
-     *
-     * @pre        preconditions for the method
-     *            (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *            (what the method guarantees upon completion)
-     * @param    y    description of parameter y
-     * @return    description of the return value
-     */
     public void setMass(double mass)
     {
         this.mass = mass;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *  that describes the operation of the method
-     *
-     * @pre     preconditions for the method
-     *          (what the method assumes about the method's parameters and class's state)
-     * @post    postconditions for the method
-     *          (what the method guarantees upon completion)
-     * @param   y   description of parameter y
-     * @return  description of the return value
-     */
     public void setRadius(double radius)
     {
         this.radius = radius;
@@ -86,5 +69,11 @@ public class SpaceSystem
     public Point2D.Double getCenter()
     {
         return center;
+    }
+    
+    private double calculation()
+    {
+        ArrayList<SpaceSystem> list = panel.getSystems();
+        
     }
 }
