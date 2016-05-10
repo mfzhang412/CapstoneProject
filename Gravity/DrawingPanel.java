@@ -28,12 +28,12 @@ public class DrawingPanel extends JPanel
     {
         this.setBackground(Color.BLACK);
         list = new ArrayList<SpaceSystem>();
-        list.add(new SpaceSystem(1.989 * Math.pow(10, 30), 50, 500, 300, 0, this));
+        list.add(new SpaceSystem(1.989 * Math.pow(10, 30), 50, 500, 300, 0, 0, this));
     }
     
-    public void addSystem(double m, double r, double x, double y, double v)
+    public void addSystem(double m, double r, double x, double y, double vX, double vY)
     {
-        list.add(new SpaceSystem(m, r, x, y, v, this));
+        list.add(new SpaceSystem(m, r, x, y, vX, vY, this));
     }
     
     public ArrayList<SpaceSystem> getSystems()

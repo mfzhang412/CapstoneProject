@@ -115,10 +115,10 @@ public class ControlPanel extends JPanel
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate velocity): ");
+            System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate X-component-velocity Y-component-velocity): ");
             Scanner scan = new Scanner(System.in);
             String[] param = (scan.next()).split(" ");
-            panel.addSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]));
+            panel.addSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]), Double.parseDouble(param[5]));
         }
     }
 }
