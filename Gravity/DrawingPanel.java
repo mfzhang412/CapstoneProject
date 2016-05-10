@@ -56,6 +56,7 @@ public class DrawingPanel extends JPanel
     {
         super.paintComponent(g);
         sys.draw((Graphics2D) g);
+        //sleep for 1 second (1000 for thread.sleep(1000))
     }
 
 }
