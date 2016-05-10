@@ -55,10 +55,7 @@ public class DrawingPanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-        for(SpaceSystem sys : list)
-        {
-            sys.draw((Graphics2D) g);
-        }
+        sys.draw((Graphics2D) g);
     }
 
 }
