@@ -26,8 +26,8 @@ public class GravityViewer extends JFrame
         control = new ControlPanel(panel);
         
         this.setLayout(new BorderLayout());
-        this.add(panel, BorderLayout.CENTER);
         this.add(control, BorderLayout.EAST);
+        this.add(panel, BorderLayout.CENTER);
         
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

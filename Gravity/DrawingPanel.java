@@ -48,7 +48,7 @@ public class DrawingPanel extends JPanel
         xVelList = new Double[list.size()];
         yVelList = new Double[list.size()];
         xCentList = new Double[list.size()];
-        xCentList = new Double[list.size()];
+        yCentList = new Double[list.size()];
     }
     
     public ArrayList<SpaceSystem> getSystems()
@@ -61,8 +61,9 @@ public class DrawingPanel extends JPanel
         super.paintComponent(g);
         for (SpaceSystem sys: list)
         {
-            sys.draw((Graphics2D) g);            
+            sys.draw((Graphics2D) g);
         }
+        super.repaint();
         this.calculateNewCenters();
         //sleep for 1 second (1000 for thread.sleep(1000))
     }

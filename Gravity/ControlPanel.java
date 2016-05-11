@@ -119,7 +119,7 @@ public class ControlPanel extends JPanel
             Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
             Double radius = Double.parseDouble(JOptionPane.showInputDialog("Set the system's radius."));
             
-            panel.addSystem(mass, radius, 100, 100, 5, 5);
+            panel.addSystem(mass, radius, 0, 0, 0, 0);
             
             //System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate X-component-velocity Y-component-velocity): ");
             //Scanner scan = new Scanner(System.in);
