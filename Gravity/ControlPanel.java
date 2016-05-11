@@ -1,4 +1,5 @@
 import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -115,10 +116,15 @@ public class ControlPanel extends JPanel
     {
         public void actionPerformed(ActionEvent e)
         {
-            System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate X-component-velocity Y-component-velocity): ");
-            Scanner scan = new Scanner(System.in);
-            String[] param = (scan.next()).split(" ");
-            panel.addSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]), Double.parseDouble(param[5]));
+            Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
+            Double radius = Double.parseDouble(JOptionPane.showInputDialog("Set the system's radius."));
+            
+            panel.addSystem(mass, radius, 100, 100, 5, 5);
+            
+            //System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate X-component-velocity Y-component-velocity): ");
+            //Scanner scan = new Scanner(System.in);
+            //String[] param = (scan.next()).split(" ");
+            //panel.addSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]), Double.parseDouble(param[5]));
         }
     }
 }

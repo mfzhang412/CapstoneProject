@@ -13,8 +13,8 @@ import java.util.ArrayList;
  */
 public class SpaceSystem
 {
-    private static final double G = 6.6741 * Math.pow(10, -11);
-    private static final int time = 1000; //1 second
+    //private static final double G = 6.6741 * Math.pow(10, -11);
+    // static final int time = 1000; //1 second
     
     /** description of instance variable x (add comment for each instance variable) */
     private double mass;
@@ -23,19 +23,17 @@ public class SpaceSystem
     private double xVelocity;
     private double yVelocity;
     private Ellipse2D.Double planet;
-    private DrawingPanel panel;
     
     /**
      * Default constructor for objects of class System
      */
-    public SpaceSystem(double m, double r, double x, double y, double vX, double vY, DrawingPanel p)
+    public SpaceSystem(double m, double r, double x, double y, double vX, double vY)
     {
         this.mass = m;
         this.radius = r;
         this.center = new Point2D.Double(x, y);
         this.xVelocity = vX;
         this.yVelocity = vY;
-        this.panel = p;
         //insert component velocities
     }
 
@@ -64,6 +62,26 @@ public class SpaceSystem
         return this.center.getY();
     }
     
+    public double getXVelocity()
+    {
+        return this.xVelocity;
+    }
+    
+    public double getYVelocity()
+    {
+        return this.yVelocity;
+    }
+    
+    public void setXVelocity(double v)
+    {
+        this.xVelocity = v;
+    }
+    
+    public void setYVelocity(double v)
+    {
+        this.yVelocity = v;
+    }
+    
     public void move(double x, double y)
     {
         center.setLocation(x, y);
@@ -72,38 +90,44 @@ public class SpaceSystem
     public void draw(Graphics2D g2)
     {
         planet = new Ellipse2D.Double(this.center.getX() - this.radius, this.center.getY() - this.radius, this.radius * 2, this.radius * 2);
-        this.calculateNewCenter();
         g2.setColor(Color.WHITE);
         g2.fill(planet);
         g2.draw(planet);
     }
     
-    private void calculateNewCenter()
-    {
-        ArrayList<SpaceSystem> list = panel.getSystems();
-        double xComp = 0.0;
-        double yComp = 0.0;
-        
-        for (SpaceSystem sys: list)
-        {
-            if (sys != this)
-            {
-                xComp += ((sys.getX() - this.getX()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
-                yComp += ((sys.getY() - this.getY()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
-            }
-        }
-        
-        double retX = this.getX() + xVelocity * 1 + .5 * (xComp / this.mass) * Math.pow(1, 2);
-        double retY = this.getY() + yVelocity * 1 + .5 * (yComp / this.mass) * Math.pow(1, 2);
-        
-        double new_velocity_X = (xComp / this.mass) * 1 + xVelocity;
-        double new_velocity_Y = (yComp / this.mass) * 1 + yVelocity;
-        
-        this.xVelocity = new_velocity_X;
-        this.yVelocity = new_velocity_Y;
-        
-        this.move(retX, retY);
-    }
+    
+    
+    
+    
+    
+    
+    
+    //     private void calculateNewCenter()
+    //     {
+    //         ArrayList<SpaceSystem> list = panel.getSystems();
+    //         double xComp = 0.0;
+    //         double yComp = 0.0;
+    //         
+    //         for (SpaceSystem sys: list)
+    //         {
+    //             if (sys != this)
+    //             {
+    //                 xComp += ((sys.getX() - this.getX()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
+    //                 yComp += ((sys.getY() - this.getY()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
+    //             }
+    //         }
+    //         
+    //         double retX = this.getX() + xVelocity * 1 + .5 * (xComp / this.mass) * Math.pow(1, 2);
+    //         double retY = this.getY() + yVelocity * 1 + .5 * (yComp / this.mass) * Math.pow(1, 2);
+    //         
+    //         double new_velocity_X = (xComp / this.mass) * 1 + xVelocity;
+    //         double new_velocity_Y = (yComp / this.mass) * 1 + yVelocity;
+    //         
+    //         this.xVelocity = new_velocity_X;
+    //         this.yVelocity = new_velocity_Y;
+    //         
+    //         this.move(retX, retY);
+    //     }
 }
 
 
