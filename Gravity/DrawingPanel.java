@@ -63,7 +63,7 @@ public class DrawingPanel extends JPanel
         {
             sys.draw((Graphics2D) g);
         }
-        super.repaint();
+        //super.repaint();
         this.calculateNewCenters();
         //sleep for 1 second (1000 for thread.sleep(1000))
     }
