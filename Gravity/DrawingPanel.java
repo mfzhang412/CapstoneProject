@@ -55,6 +55,12 @@ public class DrawingPanel extends JPanel
         
         this.mass = 0.0;
         this.radius = 0.0;
+        
+        // test
+        //CreationListener cListener = new CreationListener();
+        //Draglistener dListener = new DragListener();
+        //this.addMouseListener(clistener);
+        //this.addMouseMotionListener(dListener);
     }
     
     public void readControls(ControlPanel c)
