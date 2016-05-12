@@ -54,6 +54,11 @@ public class ControlPanel extends JPanel
         this.add(displayVel);
         this.add(set);
         
+        // test
+        //check to see if they are overlapping or not, comment one out and see
+        
+        
+        
         //MassListener m = new MassListener();
         //RadiusListener r = new RadiusListener();
         //XListener xLi = new XListener();
