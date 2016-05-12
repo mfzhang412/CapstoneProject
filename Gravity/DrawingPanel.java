@@ -44,8 +44,9 @@ public class DrawingPanel extends JPanel
         
         list = new ArrayList<SpaceSystem>();
         list.add(new SpaceSystem(1076545000876.0, 25, 600, 300, 0, -5));
-        list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 0, 13));
+        list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 3, 13));
         list.add(new SpaceSystem(10000091.0, 15, 200, 400, -7, 3));
+        list.add(new SpaceSystem(3087098471023.0, 34, 400, 100, 0, 0));
         
         xVelList = new Double[list.size()];
         yVelList = new Double[list.size()];
