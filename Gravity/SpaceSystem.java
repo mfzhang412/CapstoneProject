@@ -1,3 +1,4 @@
+import javax.swing.JComponent;
 import java.awt.geom.Point2D;
 import java.awt.geom.Ellipse2D;
 import java.awt.Color;
@@ -52,12 +53,12 @@ public class SpaceSystem
         return center;
     }
     
-    public double getX()
+    public double getXVal()
     {
         return this.center.getX();
     }
     
-    public double getY()
+    public double getYVal()
     {
         return this.center.getY();
     }
@@ -84,7 +85,7 @@ public class SpaceSystem
     
     public void move(double x, double y)
     {
-        center.setLocation(x, y);
+        this.center = new Point2D.Double(x, y);
     }
     
     public void draw(Graphics2D g2)

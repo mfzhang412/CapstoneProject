@@ -8,7 +8,9 @@ import java.awt.BorderLayout;
  * @version 14 April 2016
  */
 public class GravityViewer extends JFrame
-{
+{   
+    final static private int ANIMATION_TIME_IN_SECONDS = 100;
+    
     /** Defines the frame's dimensions */
     final static private int FRAME_WIDTH = 1200;
     final static private int FRAME_HEIGHT = 600;
@@ -32,6 +34,8 @@ public class GravityViewer extends JFrame
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(true);
+        
+
     }
 
     public static void main (String[] args)
