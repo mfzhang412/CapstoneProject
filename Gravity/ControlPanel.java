@@ -1,6 +1,7 @@
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -21,6 +22,7 @@ public class ControlPanel extends JPanel
     //private JButton xCoor;
     //private JButton yCoor;
     private JButton set;
+    private JLabel displayVel;
     
     private DrawingPanel panel;
     private SpaceSystem s;
@@ -43,11 +45,13 @@ public class ControlPanel extends JPanel
         //this.xCoor = new JButton("Set x-coordinate of the system");
         //this.yCoor = new JButton("Set y-coordinate of the system");
         
+        this.displayVel = new JLabel("          ");
         this.set = new JButton("Set parameters");
         //this.add(massOption);
         //this.add(radiusOption);
         //this.add(xCoor);
         //this.add(yCoor);
+        this.add(displayVel);
         this.add(set);
         
         //MassListener m = new MassListener();
@@ -55,7 +59,6 @@ public class ControlPanel extends JPanel
         //XListener xLi = new XListener();
         //YListener yLi = new YListener();
         SetListener ok = new SetListener();
-        
         //massOption.addActionListener(new MassListener());
         //radiusOption.addActionListener(new RadiusListener());
         //xCoor.addActionListener(new XListener());
@@ -63,9 +66,14 @@ public class ControlPanel extends JPanel
         set.addActionListener(new SetListener());
     }
     
+    public void setVelocityLabel(double v)
+    {
+        this.displayVel.setText("" + v);
+    }
+    
     public Dimension getPreferredSize()
     {
-        return (new Dimension(200, 600));
+        return (new Dimension(200, 700));
     }
 
     //     public class MassListener implements ActionListener
@@ -119,7 +127,8 @@ public class ControlPanel extends JPanel
             Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
             Double radius = Double.parseDouble(JOptionPane.showInputDialog("Set the system's radius."));
             
-            panel.addSystem(mass, radius, 0, 0, 0, 0);
+            panel.addSystem(mass, radius);
+            //panel.addSystem(mass, radius, 0, 0, 0, 0);
             
             //System.out.print("Set parameters divided by whitespace (mass radius x-coordinate y-coordinate X-component-velocity Y-component-velocity): ");
             //Scanner scan = new Scanner(System.in);

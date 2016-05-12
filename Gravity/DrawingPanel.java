@@ -5,7 +5,7 @@ import java.awt.Dimension;
 import java.awt.geom.Point2D;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import javax.swing.JColorChooser;
+import java.awt.geom.Ellipse2D;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
@@ -21,18 +21,25 @@ public class DrawingPanel extends JPanel
     private static final double G = 6.6741 * Math.pow(10, -11);
     
     /** description of instance variable x (add comment for each instance variable) */
+    protected ControlPanel controls;
+    
     private ArrayList<SpaceSystem> list;
     
-    Double[] xVelList;
-    Double[] yVelList;
-    Double[] xCentList;
-    Double[] yCentList;
+    protected Double[] xVelList;
+    protected Double[] yVelList;
+    protected Double[] xCentList;
+    protected Double[] yCentList;
 
+    protected double mass;
+    protected double radius;
+    
+    protected Graphics g;
+    
     /**
      * Default constructor for objects of class DrawingPanel
      */
     public DrawingPanel()
-    {
+    {   
         this.setBackground(Color.BLACK);
         
         list = new ArrayList<SpaceSystem>();
@@ -46,16 +53,37 @@ public class DrawingPanel extends JPanel
         yCentList = new Double[list.size()];
     }
     
-    public void addSystem(double m, double r, double x, double y, double vX, double vY)
+    public void readControls(ControlPanel c)
     {
-        SpaceSystem newSystem = new SpaceSystem(m, r, x, y, vX, vY);
-        list.add(newSystem);
-        
-        xVelList = new Double[list.size()];
-        yVelList = new Double[list.size()];
-        xCentList = new Double[list.size()];
-        yCentList = new Double[list.size()];        
+        this.controls = c;
     }
+    
+    //     public void addSystem(double m, double r, double x, double y, double vX, double vY)
+    //     {
+    //         SpaceSystem newSystem = new SpaceSystem(m, r, x, y, vX, vY);
+    //         list.add(newSystem);
+    //         
+    //         xVelList = new Double[list.size()];
+    //         yVelList = new Double[list.size()];
+    //         xCentList = new Double[list.size()];
+    //         yCentList = new Double[list.size()];        
+    //     }
+    
+    
+    
+    
+    
+    //
+    public void addSystem(double m, double r)
+    {
+        this.mass = m;
+        this.radius = r;
+    }
+    //
+    
+    
+    
+    
     
     public ArrayList<SpaceSystem> getSystems()
     {
@@ -65,7 +93,9 @@ public class DrawingPanel extends JPanel
     public void paintComponent(Graphics g)
     {
         super.paintComponent(g);
-  
+        
+        this.g = g;
+        
         for (SpaceSystem sys: list)
         {
             sys.draw((Graphics2D) g);
@@ -124,4 +154,80 @@ public class DrawingPanel extends JPanel
             list.get(i).setYVelocity(yVelList[i]);
         }
     }
+    
+    public class CreationListener implements MouseListener
+    {
+        protected double x;
+        protected double y;
+        
+        public void mousePressed(MouseEvent e)
+        {
+            this.x = e.getX();
+            this.y = e.getY();
+            
+            Ellipse2D temp = new Ellipse2D.Double(x - radius, y - radius, radius * 2, radius * 2);
+            ((Graphics2D) g).setColor(Color.WHITE);
+            ((Graphics2D) g).fill(temp);
+            ((Graphics2D) g).draw(temp);
+            
+            repaint();
+        }
+        
+        public void mouseReleased(MouseEvent e)
+        {
+            double dx = e.getX() - x;
+            double dy = e.getY() - y;
+            
+            SpaceSystem newSystem = new SpaceSystem(mass, radius, x, y, dx, dy);
+            list.add(newSystem);
+            
+            xVelList = new Double[list.size()];
+            yVelList = new Double[list.size()];
+            xCentList = new Double[list.size()];
+            yCentList = new Double[list.size()];
+        }
+        
+        
+        public void mouseClicked(MouseEvent e)
+        {
+            
+        }
+        
+        public void mouseEntered(MouseEvent e)
+        {
+            
+        }
+        
+        public void mouseExited(MouseEvent e)
+        {
+            
+        }
+        
+        public class DragListener implements MouseMotionListener
+        {            
+            public void mouseDragged(MouseEvent e)
+            {
+                double dx = e.getX() - x;
+                double dy = e.getY() - y;
+                double velocity = Math.sqrt(dx * dx + dy * dy);
+                controls.setVelocityLabel(velocity);
+                
+                g.drawLine((int) x, (int) y, (int) e.getX(), (int) e.getY());
+                
+                repaint();
+            }
+            
+            public void mouseMoved(MouseEvent e) {}
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
