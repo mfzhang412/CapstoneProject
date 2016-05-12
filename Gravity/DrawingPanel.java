@@ -34,10 +34,11 @@ public class DrawingPanel extends JPanel
     public DrawingPanel()
     {
         this.setBackground(Color.BLACK);
+        
         list = new ArrayList<SpaceSystem>();
-        //list.add(new SpaceSystem(1.989 * Math.pow(10, 30), 50, 500, 300, 0, 0));
-        list.add(new SpaceSystem(1000000000000.0, 50, 100, 300, 0, 0));
-        list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 0, 0));
+        list.add(new SpaceSystem(1000000000000.0, 50, 100, 300, 0, 5));
+        list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 0, -5));
+        list.add(new SpaceSystem(10000091.0, 50, 200, 400, 0, 0));
         
         xVelList = new Double[list.size()];
         yVelList = new Double[list.size()];
@@ -49,11 +50,11 @@ public class DrawingPanel extends JPanel
     {
         SpaceSystem newSystem = new SpaceSystem(m, r, x, y, vX, vY);
         list.add(newSystem);
+        
         xVelList = new Double[list.size()];
         yVelList = new Double[list.size()];
         xCentList = new Double[list.size()];
-        yCentList = new Double[list.size()];
-        
+        yCentList = new Double[list.size()];        
     }
     
     public ArrayList<SpaceSystem> getSystems()
@@ -63,37 +64,24 @@ public class DrawingPanel extends JPanel
     
     public void paintComponent(Graphics g)
     {
-            super.paintComponent(g);
-      
-            //super.paintComponent(g);
-            for (SpaceSystem sys: list)
-            {
-                sys.draw((Graphics2D) g);
-                //super.paintComponent(g);
-                //super.repaint();
-            }
-            repaint();
-            try
-            {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e)
-            {
-            }
-            //super.repaint();
-            this.calculateNewCenters();
-            //this.paintComponent(g);
+        super.paintComponent(g);
+  
+        for (SpaceSystem sys: list)
+        {
+            sys.draw((Graphics2D) g);
+        }
         
+        repaint();
         
-        //         super.paintComponent(g);
-        //         for (SpaceSystem sys: list)
-        //         {
-        //             sys.draw((Graphics2D) g);
-        //             //super.repaint();
-        //         }
-        //         //super.repaint();
-        //         this.calculateNewCenters(g);
-        //sleep for 1 second (1000 for thread.sleep(1000))
+        try
+        {
+            Thread.sleep(100);
+        }
+        catch (InterruptedException e)
+        {
+        }
+        
+        this.calculateNewCenters();
     }
     
     private void calculateNewCenters()

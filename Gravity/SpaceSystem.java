@@ -14,9 +14,6 @@ import java.util.ArrayList;
  */
 public class SpaceSystem
 {
-    //private static final double G = 6.6741 * Math.pow(10, -11);
-    // static final int time = 1000; //1 second
-    
     /** description of instance variable x (add comment for each instance variable) */
     private double mass;
     private double radius;
@@ -35,7 +32,6 @@ public class SpaceSystem
         this.center = new Point2D.Double(x, y);
         this.xVelocity = vX;
         this.yVelocity = vY;
-        //insert component velocities
     }
 
     public double getMass()
@@ -95,13 +91,6 @@ public class SpaceSystem
         g2.fill(planet);
         g2.draw(planet);
     }
-    
-    
-    
-    
-    
-    
-    
     
     //     private void calculateNewCenter()
     //     {
