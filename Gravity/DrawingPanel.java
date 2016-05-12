@@ -52,6 +52,9 @@ public class DrawingPanel extends JPanel
         yVelList = new Double[list.size()];
         xCentList = new Double[list.size()];
         yCentList = new Double[list.size()];
+        
+        this.mass = 0.0;
+        this.radius = 0.0;
     }
     
     public void readControls(ControlPanel c)
