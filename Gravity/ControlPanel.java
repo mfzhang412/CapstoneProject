@@ -69,6 +69,8 @@ public class ControlPanel extends JPanel
     public void setVelocityLabel(double v)
     {
         this.displayVel.setText("" + v);
+        // test
+        //repaint();
     }
     
     public Dimension getPreferredSize()
