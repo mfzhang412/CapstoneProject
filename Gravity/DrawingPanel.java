@@ -43,6 +43,7 @@ public class DrawingPanel extends JPanel
     protected Ellipse2D.Double temp;
     
     protected boolean trueFalse;
+    private boolean starter;
     
     /**
      * Default constructor for objects of class DrawingPanel
@@ -52,12 +53,13 @@ public class DrawingPanel extends JPanel
         this.setBackground(Color.BLACK);
         
         this.trueFalse = false;
+        this.starter = false;
         
         list = new ArrayList<SpaceSystem>();
-        list.add(new SpaceSystem(1076545000876.0, 25, 600, 300, 0, -5));
-        list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 3, 13));
-        list.add(new SpaceSystem(10000091.0, 15, 200, 400, -7, 3));
-        list.add(new SpaceSystem(3087098471023.0, 34, 400, 100, 0, 0));
+        //list.add(new SpaceSystem(1076545000876.0, 25, 600, 300, 0, -5));
+        //list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 3, 13));
+        //list.add(new SpaceSystem(10000091.0, 15, 200, 400, -7, 3));
+        //list.add(new SpaceSystem(3087098471023.0, 34, 400, 100, 0, 0));
         
         xVelList = new Double[list.size()];
         yVelList = new Double[list.size()];
@@ -77,6 +79,11 @@ public class DrawingPanel extends JPanel
     public void readControls(ControlPanel c)
     {
         this.controls = c;
+    }
+    
+    public void setStarter(boolean tf)
+    {
+        this.starter = tf;
     }
     
     //     public void addSystem(double m, double r, double x, double y, double vX, double vY)
@@ -156,10 +163,33 @@ public class DrawingPanel extends JPanel
         System.out.println(cListener.getiX() + "\t" + cListener.getiY() + "\t" + dListener.getfX() + "\t" + dListener.getfY());
         
         
-        
-        for (SpaceSystem sys: list)
+        if (!starter)
         {
-            sys.draw((Graphics2D) g);
+            //ArrayList<Ellipse2D.Double> = new ArrayList<Ellipse2D.Double>();
+            for (SpaceSystem sys: list)
+            {
+                Ellipse2D.Double simTemp = new Ellipse2D.Double(sys.getXVal() - sys.getRadius(), sys.getYVal() - sys.getRadius(), sys.getRadius() * 2, sys.getRadius() * 2);
+                ((Graphics2D) g).setColor(Color.WHITE);
+                ((Graphics2D) g).fill(simTemp);
+                ((Graphics2D) g).draw(simTemp);
+            }
+        }
+        else
+        {
+            for (SpaceSystem sys: list)
+            {
+                sys.draw((Graphics2D) g);
+            }
+            
+            try
+            {
+                Thread.sleep(100);
+            }
+            catch (InterruptedException e)
+            {
+            }
+            
+            this.calculateNewCenters();
         }
         
         
@@ -169,15 +199,15 @@ public class DrawingPanel extends JPanel
         
         repaint();
         
-        try
-        {
-            Thread.sleep(100);
-        }
-        catch (InterruptedException e)
-        {
-        }
-        
-        this.calculateNewCenters();
+        //         try
+        //         {
+        //             Thread.sleep(100);
+        //         }
+        //         catch (InterruptedException e)
+        //         {
+        //         }
+        //         
+        //         this.calculateNewCenters();
     }
     
     private void calculateNewCenters()

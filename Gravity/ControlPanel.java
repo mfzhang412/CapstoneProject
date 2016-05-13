@@ -22,8 +22,11 @@ public class ControlPanel extends JPanel
     //private JButton radiusOption;
     //private JButton xCoor;
     //private JButton yCoor;
-    private JButton set;
+
     private JLabel displayVel;
+    private JButton set;
+    private JButton start;
+    private JButton stop;
     
     private DrawingPanel panel;
     private SpaceSystem s;
@@ -48,6 +51,8 @@ public class ControlPanel extends JPanel
         
         this.displayVel = new JLabel("Velocity:                   ");
         this.set = new JButton("Set parameters");
+        this.start = new JButton("Start simulation");
+        this.stop = new JButton("Stop simulation");
         //this.add(massOption);
         //this.add(radiusOption);
         //this.add(xCoor);
@@ -59,7 +64,8 @@ public class ControlPanel extends JPanel
         
         this.add(displayVel);
         this.add(set);
-        
+        this.add(start);
+        this.add(stop);
         // test
         //check to see if they are overlapping or not, comment one out and see
         
@@ -69,12 +75,13 @@ public class ControlPanel extends JPanel
         //RadiusListener r = new RadiusListener();
         //XListener xLi = new XListener();
         //YListener yLi = new YListener();
-        SetListener ok = new SetListener();
         //massOption.addActionListener(new MassListener());
         //radiusOption.addActionListener(new RadiusListener());
         //xCoor.addActionListener(new XListener());
         //yCoor.addActionListener(new YListener());
         set.addActionListener(new SetListener());
+        start.addActionListener(new StartListener());
+        stop.addActionListener(new StopListener());
     }
     
     public void setVelocityLabel(double v)
@@ -147,6 +154,22 @@ public class ControlPanel extends JPanel
             //Scanner scan = new Scanner(System.in);
             //String[] param = (scan.next()).split(" ");
             //panel.addSystem(Double.parseDouble(param[0]), Double.parseDouble(param[1]), Double.parseDouble(param[2]), Double.parseDouble(param[3]), Double.parseDouble(param[4]), Double.parseDouble(param[5]));
+        }
+    }
+    
+    public class StartListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            panel.setStarter(true);
+        }
+    }
+    
+    public class StopListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            panel.setStarter(false);
         }
     }
 }
