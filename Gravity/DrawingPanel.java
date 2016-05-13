@@ -35,6 +35,9 @@ public class DrawingPanel extends JPanel
     
     protected Graphics g;
     
+    protected CreationListener cListener;
+    protected DragListener dListener;
+    
     /**
      * Default constructor for objects of class DrawingPanel
      */
@@ -53,14 +56,14 @@ public class DrawingPanel extends JPanel
         xCentList = new Double[list.size()];
         yCentList = new Double[list.size()];
         
-        this.mass = 0.0;
-        this.radius = 0.0;
+        this.mass = Math.pow(1, -10);
+        this.radius = 20.0;
         
         // test
-        //CreationListener cListener = new CreationListener();
-        //Draglistener dListener = new DragListener();
-        //this.addMouseListener(clistener);
-        //this.addMouseMotionListener(dListener);
+        cListener = new CreationListener();
+        dListener = new DragListener();
+        this.addMouseListener(cListener);
+        this.addMouseMotionListener(dListener);
     }
     
     public void readControls(ControlPanel c)
@@ -167,8 +170,8 @@ public class DrawingPanel extends JPanel
     
     public class CreationListener implements MouseListener
     {
-        protected double x;
-        protected double y;
+        private double x;
+        private double y;
         
         public void mousePressed(MouseEvent e)
         {
@@ -197,6 +200,15 @@ public class DrawingPanel extends JPanel
             yCentList = new Double[list.size()];
         }
         
+        public double getiX()
+        {
+            return this.x;
+        }
+        
+        public double getiY()
+        {
+            return this.y;
+        }
         
         public void mouseClicked(MouseEvent e)
         {
@@ -212,32 +224,22 @@ public class DrawingPanel extends JPanel
         {
             
         }
-        
-        public class DragListener implements MouseMotionListener
-        {            
-            public void mouseDragged(MouseEvent e)
-            {
-                double dx = e.getX() - x;
-                double dy = e.getY() - y;
-                double velocity = Math.sqrt(dx * dx + dy * dy);
-                controls.setVelocityLabel(velocity);
-                
-                g.drawLine((int) x, (int) y, (int) e.getX(), (int) e.getY());
-                
-                repaint();
-            }
-            
-            public void mouseMoved(MouseEvent e) {}
-        }
     }
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    public class DragListener implements MouseMotionListener
+    {            
+        public void mouseDragged(MouseEvent e)
+        {
+            double dx = e.getX() - cListener.getiX();
+            double dy = e.getY() - cListener.getiY();
+            double velocity = Math.sqrt(dx * dx + dy * dy);
+            controls.setVelocityLabel(velocity);
+            
+            g.drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) e.getX(), (int) e.getY());
+            
+            repaint();
+        }
+        
+        public void mouseMoved(MouseEvent e) {}
+    }
 }

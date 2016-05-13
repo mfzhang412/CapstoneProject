@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
@@ -45,14 +46,19 @@ public class ControlPanel extends JPanel
         //this.xCoor = new JButton("Set x-coordinate of the system");
         //this.yCoor = new JButton("Set y-coordinate of the system");
         
-        this.displayVel = new JLabel("          ");
+        this.displayVel = new JLabel("Velocity:");
         this.set = new JButton("Set parameters");
         //this.add(massOption);
         //this.add(radiusOption);
         //this.add(xCoor);
         //this.add(yCoor);
-        this.add(displayVel);
-        this.add(set);
+        
+        this.setLayout(new BorderLayout());
+        this.add(displayVel, BorderLayout.NORTH);
+        this.add(set, BorderLayout.CENTER);
+        
+        //this.add(displayVel);
+        //this.add(set);
         
         // test
         //check to see if they are overlapping or not, comment one out and see
@@ -73,7 +79,7 @@ public class ControlPanel extends JPanel
     
     public void setVelocityLabel(double v)
     {
-        this.displayVel.setText("" + v);
+        this.displayVel.setText("Velocity: " + v + " m/s");
         // test
         //repaint();
     }
