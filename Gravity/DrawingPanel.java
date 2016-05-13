@@ -10,6 +10,8 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseEvent;
 
+import java.awt.geom.Line2D;
+
 /**
  * Write a description of class DrawingPanel here.
  * 
@@ -38,12 +40,18 @@ public class DrawingPanel extends JPanel
     protected CreationListener cListener;
     protected DragListener dListener;
     
+    protected Ellipse2D.Double temp;
+    
+    protected boolean trueFalse;
+    
     /**
      * Default constructor for objects of class DrawingPanel
      */
     public DrawingPanel()
     {   
         this.setBackground(Color.BLACK);
+        
+        this.trueFalse = false;
         
         list = new ArrayList<SpaceSystem>();
         list.add(new SpaceSystem(1076545000876.0, 25, 600, 300, 0, -5));
@@ -109,10 +117,55 @@ public class DrawingPanel extends JPanel
         
         this.g = g;
         
+        //for (SpaceSystem sys: list)
+        //{
+        //    sys.draw((Graphics2D) g);
+        //}
+        
+        if (trueFalse)
+        {
+            ((Graphics2D) g).setColor(Color.BLUE);
+        }
+        else
+        {
+            ((Graphics2D) g).setColor(Color.BLACK);
+        }
+        //((Graphics2D) g).setColor(Color.BLACK);
+        
+        if (temp == null)
+        {
+            System.out.println("Paintcomponent temp is null");
+        }
+        else
+        {
+            System.out.println("Paintcomponent temp is real");
+        }
+        
+        if (temp != null)
+        {
+            try
+            {
+                ((Graphics2D) g).fill(temp);
+                ((Graphics2D) g).draw(temp);
+            }
+            catch (NullPointerException e)
+            {}
+        }
+        
+        ((Graphics2D) g).drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) dListener.getfX(), (int) dListener.getfY());
+        System.out.println(cListener.getiX() + "\t" + cListener.getiY() + "\t" + dListener.getfX() + "\t" + dListener.getfY());
+        
+        
+        
         for (SpaceSystem sys: list)
         {
             sys.draw((Graphics2D) g);
         }
+        
+        
+        
+        
+        
         
         repaint();
         
@@ -178,10 +231,22 @@ public class DrawingPanel extends JPanel
             this.x = e.getX();
             this.y = e.getY();
             
-            Ellipse2D temp = new Ellipse2D.Double(x - radius, y - radius, radius * 2, radius * 2);
-            ((Graphics2D) g).setColor(Color.WHITE);
-            ((Graphics2D) g).fill(temp);
-            ((Graphics2D) g).draw(temp);
+            temp = new Ellipse2D.Double(x - radius, y - radius, radius * 2, radius * 2);
+            
+            //((Graphics2D) g).setColor(Color.WHITE);
+            //((Graphics2D) g).fill(temp);
+            //((Graphics2D) g).draw(temp);
+            
+            trueFalse = true;
+            
+            if (temp == null)
+            {
+                System.out.println("Temp is null");
+            }
+            else
+            {
+                System.out.println("Temp is real");
+            }
             
             repaint();
         }
@@ -198,6 +263,8 @@ public class DrawingPanel extends JPanel
             yVelList = new Double[list.size()];
             xCentList = new Double[list.size()];
             yCentList = new Double[list.size()];
+            
+            trueFalse = false;
         }
         
         public double getiX()
@@ -227,17 +294,36 @@ public class DrawingPanel extends JPanel
     }
     
     public class DragListener implements MouseMotionListener
-    {            
+    {
+        private double x;
+        private double y;
+        
         public void mouseDragged(MouseEvent e)
         {
+            this.x = e.getX();
+            this.y = e.getY();
+            
             double dx = e.getX() - cListener.getiX();
             double dy = e.getY() - cListener.getiY();
             double velocity = Math.sqrt(dx * dx + dy * dy);
             controls.setVelocityLabel(velocity);
             
-            g.drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) e.getX(), (int) e.getY());
+            //Graphics2D g2 = (Graphics2D) g;
+            
+            //g2.setColor(Color.BLACK);
+            //g2.drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) e.getX(), (int) e.getY());
             
             repaint();
+        }
+        
+        public double getfX()
+        {
+            return this.x;
+        }
+        
+        public double getfY()
+        {
+            return this.y;
         }
         
         public void mouseMoved(MouseEvent e) {}
