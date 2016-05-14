@@ -27,6 +27,7 @@ public class ControlPanel extends JPanel
     private JButton set;
     private JButton start;
     private JButton stop;
+    private JButton clear;
     
     private DrawingPanel panel;
     private SpaceSystem s;
@@ -52,7 +53,8 @@ public class ControlPanel extends JPanel
         this.displayVel = new JLabel("Velocity:                   ");
         this.set = new JButton("Set parameters");
         this.start = new JButton("Start simulation");
-        this.stop = new JButton("Stop simulation");
+        this.stop = new JButton("Pause simulation");
+        this.clear = new JButton("Clear systems");
         //this.add(massOption);
         //this.add(radiusOption);
         //this.add(xCoor);
@@ -66,6 +68,7 @@ public class ControlPanel extends JPanel
         this.add(set);
         this.add(start);
         this.add(stop);
+        this.add(clear);
         // test
         //check to see if they are overlapping or not, comment one out and see
         
@@ -82,6 +85,7 @@ public class ControlPanel extends JPanel
         set.addActionListener(new SetListener());
         start.addActionListener(new StartListener());
         stop.addActionListener(new StopListener());
+        clear.addActionListener(new ClearListener());
     }
     
     public void setVelocityLabel(double v)
@@ -170,6 +174,15 @@ public class ControlPanel extends JPanel
         public void actionPerformed(ActionEvent e)
         {
             panel.setStarter(false);
+        }
+    }
+    
+    public class ClearListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+        {
+            panel.setStarter(false);
+            panel.clearSystems();
         }
     }
 }

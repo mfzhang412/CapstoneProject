@@ -76,6 +76,13 @@ public class DrawingPanel extends JPanel
         this.addMouseMotionListener(dListener);
     }
     
+    public void simulateSolarSystem()
+    {
+        //list = new ArrayList<SpaceSystem>();
+        //list.add(new SpaceSystem(1.9891 * Math.pow(10, 30), 8.789386813, 575, 350, 0, 0));//sun
+        //list.add(new SpaceSystem(3.285 * Math.pow(10, 23), .0308288462, 
+    }
+    
     public void readControls(ControlPanel c)
     {
         this.controls = c;
@@ -86,6 +93,10 @@ public class DrawingPanel extends JPanel
         this.starter = tf;
     }
     
+    public void clearSystems()
+    {
+        list = new ArrayList<SpaceSystem>();
+    }
     //     public void addSystem(double m, double r, double x, double y, double vX, double vY)
     //     {
     //         SpaceSystem newSystem = new SpaceSystem(m, r, x, y, vX, vY);
@@ -219,23 +230,23 @@ public class DrawingPanel extends JPanel
             
             for (SpaceSystem sys: list)
             {
-                if (sys != list.get(i))
+                if ((list.get(i) != sys) && ((sys.getXVal() != list.get(i).getXVal()) && (sys.getYVal() != list.get(i).getYVal())))
                 {
                     xComp += ((sys.getXVal() - list.get(i).getXVal()) * (G * sys.getMass() * list.get(i).getMass())) / ((Math.pow(sys.getXVal() - list.get(i).getXVal(), 2)) + (Math.pow(sys.getYVal() - list.get(i).getYVal(), 2)));
                     yComp += ((sys.getYVal() - list.get(i).getYVal()) * (G * sys.getMass() * list.get(i).getMass())) / ((Math.pow(sys.getXVal() - list.get(i).getXVal(), 2)) + (Math.pow(sys.getYVal() - list.get(i).getYVal(), 2)));
                 }
             }
             
-            double retX = list.get(i).getXVal() + list.get(i).getXVelocity() * 1 + .5 * (xComp / list.get(i).getMass()) * Math.pow(1, 2);
-            double retY = list.get(i).getYVal() + list.get(i).getYVelocity() * 1 + .5 * (yComp / list.get(i).getMass()) * Math.pow(1, 2);
+            double cenX = list.get(i).getXVal() + list.get(i).getXVelocity() * 1 + .5 * (xComp / list.get(i).getMass()) * Math.pow(1, 2);
+            double cenY = list.get(i).getYVal() + list.get(i).getYVelocity() * 1 + .5 * (yComp / list.get(i).getMass()) * Math.pow(1, 2);
             
             double new_velocity_X = (xComp / list.get(i).getMass()) * 1 + list.get(i).getXVelocity();
             double new_velocity_Y = (yComp / list.get(i).getMass()) * 1 + list.get(i).getYVelocity();
             
             xVelList[i] = new_velocity_X;
             yVelList[i] = new_velocity_Y;
-            xCentList[i] = retX;
-            yCentList[i] = retY;
+            xCentList[i] = cenX;
+            yCentList[i] = cenY;
         }
         
         this.updateSystems();

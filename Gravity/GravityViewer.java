@@ -10,7 +10,7 @@ import java.awt.BorderLayout;
 public class GravityViewer extends JFrame
 {   
     /** Defines the frame's dimensions */
-    final static private int FRAME_WIDTH = 1200;
+    final static private int FRAME_WIDTH = 1350;
     final static private int FRAME_HEIGHT = 700;
     
     /** Instantiates the panel on which the systems are drawn and the controller to create the systems */
