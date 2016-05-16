@@ -87,10 +87,14 @@ public class ControlPanel extends JPanel
          */
         public void actionPerformed(ActionEvent e)
         {
-            Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
-            Double radius = Double.parseDouble(JOptionPane.showInputDialog("Set the system's radius."));
-            
-            panel.addSystem(mass, radius);
+            try
+            {
+                Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
+                Double radius = Double.parseDouble(JOptionPane.showInputDialog("Set the system's radius."));
+                
+                panel.addSystem(mass, radius);
+            }
+            catch (NullPointerException ex) {}
         }
     }
     
