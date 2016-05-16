@@ -67,9 +67,8 @@ public class DrawingPanel extends JPanel
         yCentList = new Double[list.size()];
         
         this.mass = Math.pow(1, -10);
-        this.radius = 20.0;
+        this.radius = 1;
         
-        // test
         cListener = new CreationListener();
         dListener = new DragListener();
         this.addMouseListener(cListener);
@@ -97,32 +96,12 @@ public class DrawingPanel extends JPanel
     {
         list = new ArrayList<SpaceSystem>();
     }
-    //     public void addSystem(double m, double r, double x, double y, double vX, double vY)
-    //     {
-    //         SpaceSystem newSystem = new SpaceSystem(m, r, x, y, vX, vY);
-    //         list.add(newSystem);
-    //         
-    //         xVelList = new Double[list.size()];
-    //         yVelList = new Double[list.size()];
-    //         xCentList = new Double[list.size()];
-    //         yCentList = new Double[list.size()];        
-    //     }
-    
-    
-    
-    
-    
-    //
+
     public void addSystem(double m, double r)
     {
         this.mass = m;
         this.radius = r;
     }
-    //
-    
-    
-    
-    
     
     public ArrayList<SpaceSystem> getSystems()
     {
@@ -135,11 +114,6 @@ public class DrawingPanel extends JPanel
         
         this.g = g;
         
-        //for (SpaceSystem sys: list)
-        //{
-        //    sys.draw((Graphics2D) g);
-        //}
-        
         if (trueFalse)
         {
             ((Graphics2D) g).setColor(Color.BLUE);
@@ -147,16 +121,6 @@ public class DrawingPanel extends JPanel
         else
         {
             ((Graphics2D) g).setColor(Color.BLACK);
-        }
-        //((Graphics2D) g).setColor(Color.BLACK);
-        
-        if (temp == null)
-        {
-            System.out.println("Paintcomponent temp is null");
-        }
-        else
-        {
-            System.out.println("Paintcomponent temp is real");
         }
         
         if (temp != null)
@@ -166,17 +130,13 @@ public class DrawingPanel extends JPanel
                 ((Graphics2D) g).fill(temp);
                 ((Graphics2D) g).draw(temp);
             }
-            catch (NullPointerException e)
-            {}
+            catch (NullPointerException e) {}
         }
         
         ((Graphics2D) g).drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) dListener.getfX(), (int) dListener.getfY());
-        System.out.println(cListener.getiX() + "\t" + cListener.getiY() + "\t" + dListener.getfX() + "\t" + dListener.getfY());
-        
         
         if (!starter)
         {
-            //ArrayList<Ellipse2D.Double> = new ArrayList<Ellipse2D.Double>();
             for (SpaceSystem sys: list)
             {
                 Ellipse2D.Double simTemp = new Ellipse2D.Double(sys.getXVal() - sys.getRadius(), sys.getYVal() - sys.getRadius(), sys.getRadius() * 2, sys.getRadius() * 2);
@@ -196,29 +156,12 @@ public class DrawingPanel extends JPanel
             {
                 Thread.sleep(100);
             }
-            catch (InterruptedException e)
-            {
-            }
+            catch (InterruptedException e) {}
             
             this.calculateNewCenters();
         }
         
-        
-        
-        
-        
-        
         repaint();
-        
-        //         try
-        //         {
-        //             Thread.sleep(100);
-        //         }
-        //         catch (InterruptedException e)
-        //         {
-        //         }
-        //         
-        //         this.calculateNewCenters();
     }
     
     private void calculateNewCenters()
@@ -262,6 +205,7 @@ public class DrawingPanel extends JPanel
         }
     }
     
+    
     public class CreationListener implements MouseListener
     {
         private double x;
@@ -274,20 +218,7 @@ public class DrawingPanel extends JPanel
             
             temp = new Ellipse2D.Double(x - radius, y - radius, radius * 2, radius * 2);
             
-            //((Graphics2D) g).setColor(Color.WHITE);
-            //((Graphics2D) g).fill(temp);
-            //((Graphics2D) g).draw(temp);
-            
             trueFalse = true;
-            
-            if (temp == null)
-            {
-                System.out.println("Temp is null");
-            }
-            else
-            {
-                System.out.println("Temp is real");
-            }
             
             repaint();
         }
@@ -318,20 +249,11 @@ public class DrawingPanel extends JPanel
             return this.y;
         }
         
-        public void mouseClicked(MouseEvent e)
-        {
-            
-        }
+        public void mouseClicked(MouseEvent e) {}
         
-        public void mouseEntered(MouseEvent e)
-        {
-            
-        }
+        public void mouseEntered(MouseEvent e) {}
         
-        public void mouseExited(MouseEvent e)
-        {
-            
-        }
+        public void mouseExited(MouseEvent e) {}
     }
     
     public class DragListener implements MouseMotionListener
@@ -348,11 +270,6 @@ public class DrawingPanel extends JPanel
             double dy = e.getY() - cListener.getiY();
             double velocity = Math.sqrt(dx * dx + dy * dy);
             controls.setVelocityLabel(velocity);
-            
-            //Graphics2D g2 = (Graphics2D) g;
-            
-            //g2.setColor(Color.BLACK);
-            //g2.drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) e.getX(), (int) e.getY());
             
             repaint();
         }

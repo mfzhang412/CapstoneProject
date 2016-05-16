@@ -91,33 +91,6 @@ public class SpaceSystem
         g2.fill(planet);
         g2.draw(planet);
     }
-    
-    //     private void calculateNewCenter()
-    //     {
-    //         ArrayList<SpaceSystem> list = panel.getSystems();
-    //         double xComp = 0.0;
-    //         double yComp = 0.0;
-    //         
-    //         for (SpaceSystem sys: list)
-    //         {
-    //             if (sys != this)
-    //             {
-    //                 xComp += ((sys.getX() - this.getX()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
-    //                 yComp += ((sys.getY() - this.getY()) * (G * sys.getMass() * this.mass)) / ((Math.pow(sys.getX() - this.getX(), 2)) + (Math.pow(sys.getY() - this.getY(), 2)));
-    //             }
-    //         }
-    //         
-    //         double retX = this.getX() + xVelocity * 1 + .5 * (xComp / this.mass) * Math.pow(1, 2);
-    //         double retY = this.getY() + yVelocity * 1 + .5 * (yComp / this.mass) * Math.pow(1, 2);
-    //         
-    //         double new_velocity_X = (xComp / this.mass) * 1 + xVelocity;
-    //         double new_velocity_Y = (yComp / this.mass) * 1 + yVelocity;
-    //         
-    //         this.xVelocity = new_velocity_X;
-    //         this.yVelocity = new_velocity_Y;
-    //         
-    //         this.move(retX, retY);
-    //     }
 }
 
 
