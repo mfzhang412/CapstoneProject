@@ -1,29 +1,30 @@
-import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.util.Scanner;
 import java.awt.Dimension;
 
 /**
- * Write a description of class ControlPanel here.
+ * The control panel that shows a system's velocity, allows the user to set the parameters of the systems,
+ *      start and paue the simulation, and clear the simulation.
  * 
  * @author Michael Zhang
- * @version 14 April 2016
+ * @version 15 May 2016
  */
 public class ControlPanel extends JPanel
 {
-    /** description of instance variable x (add comment for each instance variable) */
+    /** The label that displays the velocity */
     private JLabel displayVel;
+    
+    /** The buttons that allow the user to set parameters of the system and start, pause, and clear the simulation */
     private JButton set;
     private JButton start;
     private JButton stop;
     private JButton clear;
     
+    /** The drawing panel and system that will be added to the panel's ArrayList<SpaceSystem> */
     private DrawingPanel panel;
     private SpaceSystem s;
     
@@ -32,31 +33,45 @@ public class ControlPanel extends JPanel
      */
     public ControlPanel(DrawingPanel panel)
     {
+        // sets the DrawingPanel parameter passed in to ControlPanel's panel instance variable
         this.panel = panel;
         
+        // creates the label and buttons to be added to the control panel
         this.displayVel = new JLabel("Velocity:                   ");
         this.set = new JButton("Set parameters");
         this.start = new JButton("Start simulation");
         this.stop = new JButton("Pause simulation");
         this.clear = new JButton("Clear systems");
         
+        // adds the label and buttons to be displayed
         this.add(displayVel);
         this.add(set);
         this.add(start);
         this.add(stop);
         this.add(clear);
         
+        // sets listeners so that, when pressed, the button will do an action
         set.addActionListener(new SetListener());
         start.addActionListener(new StartListener());
         stop.addActionListener(new StopListener());
         clear.addActionListener(new ClearListener());
     }
     
+    /**
+     * Displays the velocity
+     * 
+     * @param  v   the velocity to be displayed
+     */
     public void setVelocityLabel(double v)
     {
         this.displayVel.setText("Velocity: " + v + " m/s");
     }
     
+    /**
+     * Overrides JPanel's getPreferredSize() method
+     * 
+     * @return     the dimensions of the control panel
+     */
     public Dimension getPreferredSize()
     {
         return (new Dimension(200, 700));
@@ -65,6 +80,11 @@ public class ControlPanel extends JPanel
     
     public class SetListener implements ActionListener
     {
+        /**
+         * Passes the mass and radius that the user sets to the DrawingPanel
+         * 
+         * @param  e   an ActionEvent object 
+         */
         public void actionPerformed(ActionEvent e)
         {
             Double mass = Double.parseDouble(JOptionPane.showInputDialog("Set the system's mass."));
@@ -76,6 +96,11 @@ public class ControlPanel extends JPanel
     
     public class StartListener implements ActionListener
     {
+        /**
+         * Starts the DrawingPanel's simulation status
+         * 
+         * @param  e   an ActionEvent object
+         */
         public void actionPerformed(ActionEvent e)
         {
             panel.setStarter(true);
@@ -84,6 +109,11 @@ public class ControlPanel extends JPanel
     
     public class StopListener implements ActionListener
     {
+        /**
+         * Pauses the DrawingPanel's simulation status
+         * 
+         * @param  e   an ActionEvent object
+         */
         public void actionPerformed(ActionEvent e)
         {
             panel.setStarter(false);
@@ -92,6 +122,11 @@ public class ControlPanel extends JPanel
     
     public class ClearListener implements ActionListener
     {
+        /**
+         * Clears the SpaceSystem objects from DrawingPanel and pauses the DrawingPanel's simulation status
+         * 
+         * @param  e   an ActionEvent object
+         */
         public void actionPerformed(ActionEvent e)
         {
             panel.setStarter(false);

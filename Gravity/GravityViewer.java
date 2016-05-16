@@ -5,7 +5,7 @@ import java.awt.BorderLayout;
  * The frame component of the Gravity class
  * 
  * @author Michael Zhang
- * @version 14 April 2016
+ * @version 15 May 2016
  */
 public class GravityViewer extends JFrame
 {   
