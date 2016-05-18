@@ -2,8 +2,11 @@ import javax.swing.JPanel;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JSlider;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ChangeEvent;
 import java.awt.Dimension;
 
 /**
@@ -18,11 +21,17 @@ public class ControlPanel extends JPanel
     /** The label that displays the velocity */
     private JLabel displayVel;
     
+    /** The label that states the slider for the the simulation's speed */
+    private JLabel simSpeed;
+    
     /** The buttons that allow the user to set parameters of the system and start, pause, and clear the simulation */
     private JButton set;
     private JButton start;
     private JButton stop;
     private JButton clear;
+    
+    /** The slider that allows the user to adjust the simulation's speed */
+    protected JSlider slide;
     
     /** The drawing panel and system that will be added to the panel's ArrayList<SpaceSystem> */
     private DrawingPanel panel;
@@ -36,25 +45,41 @@ public class ControlPanel extends JPanel
         // sets the DrawingPanel parameter passed in to ControlPanel's panel instance variable
         this.panel = panel;
         
-        // creates the label and buttons to be added to the control panel
-        this.displayVel = new JLabel("Velocity:                   ");
+        // creates the labels, buttons, and slider to be added to the control panel
+        this.displayVel = new JLabel("Velocity:                            ");
         this.set = new JButton("Set parameters");
         this.start = new JButton("Start simulation");
         this.stop = new JButton("Pause simulation");
         this.clear = new JButton("Clear systems");
+        this.simSpeed = new JLabel("<html><br>Simulation speed: x1</html>");
+        this.slide = new JSlider(0, 25);
         
-        // adds the label and buttons to be displayed
+        // adjusts the visuals of the slider
+        this.slide.setSnapToTicks(true);
+        this.slide.setPaintTicks(true);
+        this.slide.setMajorTickSpacing(5);
+        this.slide.setMinorTickSpacing(1);
+        this.slide.setPaintLabels(true);
+        this.slide.setValue(1);
+        this.slide.setLabelTable(this.slide.createStandardLabels(5, 0));
+        
+        // adds the labels, buttons, and slider to be displayed
         this.add(displayVel);
         this.add(set);
         this.add(start);
         this.add(stop);
         this.add(clear);
+        this.add(simSpeed);
+        this.add(slide);
         
-        // sets listeners so that, when pressed, the button will do an action
+        // adds listeners so that, when pressed, the buttons will do an action
         set.addActionListener(new SetListener());
         start.addActionListener(new StartListener());
         stop.addActionListener(new StopListener());
         clear.addActionListener(new ClearListener());
+        
+        // adds listener so that, when moved, the slider will do an action
+        slide.addChangeListener(new SlideListener());
     }
     
     /**
@@ -135,6 +160,20 @@ public class ControlPanel extends JPanel
         {
             panel.setStarter(false);
             panel.clearSystems();
+        }
+    }
+    
+    public class SlideListener implements ChangeListener
+    {
+        /**
+         * Modifies the simulation's speed
+         *
+         * @param  e   a ChangeEvent object
+         */
+        public void stateChanged(ChangeEvent e)
+        {
+            simSpeed.setText("<html><br>Simulation speed: x" + slide.getValue() + "</html>");
+            panel.setSimTime(slide.getValue());
         }
     }
 }

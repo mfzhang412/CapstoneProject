@@ -31,6 +31,12 @@ public class DrawingPanel extends JPanel
     protected Double[] xCentList;
     protected Double[] yCentList;
 
+    
+    
+    private double simTime = 1.0;
+    
+    
+    
     /** The ControlPanel object that allows the user to change the velocity label displayed on the control panel */
     protected ControlPanel controls;
     
@@ -152,6 +158,16 @@ public class DrawingPanel extends JPanel
     }
     
     /**
+     * Sets the simulation's speed
+     *
+     * @param  t   time elapsed between calculations
+     */
+    public void setSimTime(double t)
+    {
+        this.simTime = t;
+    }
+    
+    /**
      * The paint component that will draw the shapes 
      * 
      * @param  g   A Graphics object
@@ -243,12 +259,12 @@ public class DrawingPanel extends JPanel
             }
             
             // calculates the new center of the SpaceSystem object after a 1 second interval
-            double cenX = list.get(i).getXVal() + list.get(i).getXVelocity() * 1 + .5 * (xComp / list.get(i).getMass()) * Math.pow(1, 2);
-            double cenY = list.get(i).getYVal() + list.get(i).getYVelocity() * 1 + .5 * (yComp / list.get(i).getMass()) * Math.pow(1, 2);
+            double cenX = list.get(i).getXVal() + list.get(i).getXVelocity() * this.simTime + .5 * (xComp / list.get(i).getMass()) * Math.pow(this.simTime, 2);
+            double cenY = list.get(i).getYVal() + list.get(i).getYVelocity() * this.simTime + .5 * (yComp / list.get(i).getMass()) * Math.pow(this.simTime, 2);
             
             // calculates the velocity components of the SpaceSystem object after a 1 second interval
-            double new_velocity_X = (xComp / list.get(i).getMass()) * 1 + list.get(i).getXVelocity();
-            double new_velocity_Y = (yComp / list.get(i).getMass()) * 1 + list.get(i).getYVelocity();
+            double new_velocity_X = (xComp / list.get(i).getMass()) * this.simTime + list.get(i).getXVelocity();
+            double new_velocity_Y = (yComp / list.get(i).getMass()) * this.simTime + list.get(i).getYVelocity();
             
             // adds the components to arrays so as to keep the integrity of the calculations due to instantaneity
             xCentList[i] = cenX;
