@@ -261,13 +261,27 @@ public class DrawingPanel extends JPanel
         this.updateSystems();
     }
     
-    private void testCalc_new()
+    
+    
+    
+    
+    
+    
+    
+    
+    /**
+     * The method that calculates the new centers and new velocities of the SpaceSystem objects' for the next frame
+     */
+    private void test_calculateNextFrame()
     {
+        // calculates the new center and velocity for the respective element in the ArrayList 'list'
         for (int i = 0; i < list.size(); i++)
         {
+            // the force components of the SpaceSystem object in the x and y direction
             double xComp = 0.0;
             double yComp = 0.0;
             
+            // calculates the x and y components for the SpaceSystem object with correct magnitude (1 unit = 1 newton)
             for (SpaceSystem sys)
             {
                 if ((list.get(i) != sys) && ((list.get(i).getXVal() != sys.getXVal()) && (list.get(i).getYVal() != sys.getYVal())))
@@ -277,10 +291,26 @@ public class DrawingPanel extends JPanel
                 }
             }
         
-        double cen_x = 
+        // calculates the new center of the SpaceSystem object after a 1 second interval
+        double cenX = .5 * (xComp / list.get(i).getMass()) * Math.pow(1, 2) + list.get(i).getXVelocity();
+        double cenY = .5 * (yComp / list.get(i).getMass()) * Math.pow(1, 2) + list.get(i).getYVelocity();
+        
+        // calculates the velocity components of the SpaceSystem object after a 1 second interval
+        double new_velocity_X = (xComp / list.get(i).getMass()) * 1 + list.get(i).getXVelocity();
+        double new_velocity_Y = (yComp / list.get(i).getMass()) * 1 + list.get(i).getYVelocity();
+        
+        // adds the components to arrays so as to keep the integrity of the calculations due to instantaneity
+        xVelList[i] = new_velocity_X;
+        yVelList[i] = new_velocity_Y;
+        xCentList[i] = cenX;
+        yCentList[i] = cenY;
         }
     
+        // function that is called to set the SpaceSystem objects' center, x-component velocity, and y-component velocity
+        this.updateSystems();
     }
+    
+    
     
     
     
