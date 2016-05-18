@@ -261,6 +261,34 @@ public class DrawingPanel extends JPanel
         this.updateSystems();
     }
     
+    private void testCalc_new()
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
+            double xComp = 0.0;
+            double yComp = 0.0;
+            
+            for (SpaceSystem sys)
+            {
+                if ((list.get(i) != sys) && ((list.get(i).getXVal() != sys.getXVal()) && (list.get(i).getYVal() != sys.getYVal())))
+                {
+                    xComp += (G * list.get(i).getMass() * sys.getMass()) / (Math.pow(sys.getXVal() - list.get(i).getXVal(), 2));
+                    yComp += (G * list.get(i).getMass() * sys.getMass()) / (Math.pow(sys.getYVal() - list.get(i).getYVal(), 2));
+                }
+            }
+        
+        double cen_x = 
+        }
+    
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * The method that sets the SpaceSystem objects' centers and x-component velocity, and y-component velocity for the next frame
      */
