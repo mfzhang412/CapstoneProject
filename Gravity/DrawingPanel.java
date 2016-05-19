@@ -12,7 +12,7 @@ import java.awt.event.MouseEvent;
  * A panel that displays and allows the user to interact, via pressing, dragging, and releasing the mouse, with the simulation.
  *      The SpaceSystem objects run according to 1 second intervals (calculations, new velocities, new center positions).
  *      Implications of 1 second intervals: the SpaceSystem objects move linearly for 1 second before making adjustments to velocity, and thus position is also affected.
- *      Scaling: 1 pixel (simulation) = 1 meter (real world). 1/10 second --> 1 frame (simulation) = 1 second (real world).
+ *      Scaling: 1 pixel (simulation) = 1 meter (real world). At x1 simulation speed, 1/10 second = 1 frame (simulation) = 1 second (real world).
  * 
  * @author Michael Zhang 
  * @version 15 May 2016
@@ -31,11 +31,8 @@ public class DrawingPanel extends JPanel
     protected Double[] xCentList;
     protected Double[] yCentList;
 
-    
-    
+    /** The simulation's speed*/
     private double simTime = 1.0;
-    
-    
     
     /** The ControlPanel object that allows the user to change the velocity label displayed on the control panel */
     protected ControlPanel controls;
@@ -57,6 +54,9 @@ public class DrawingPanel extends JPanel
     /** Boolean variable that checks whether or not the color to be displayed should be blue or black (depends on whether the user is adding a SpaceSystem object to the simulation or not) */
     protected boolean trueFalse;
     
+    /** Boolean variable that checks whether the velocity magnitude line should be drawn as green or should not be drawn */
+    protected boolean lineTF;
+    
     /**
      * Default constructor for objects of class DrawingPanel
      */
@@ -65,18 +65,23 @@ public class DrawingPanel extends JPanel
         // sets the background of the simulation to black
         this.setBackground(Color.BLACK);
         
-        // sets the color of the "temp" intance variable - if drawn - to black
+        // sets the color of the "temp" intance variable, if drawn, to black
         this.trueFalse = false;
+        
+        // sets the velocity magnitude line to be drawn to false
+        this.lineTF = false;
         
         // sets the simulation's initial state to pause
         this.starter = false;
         
         // creates the list that the SpaceSystem objects will be stored in and later drawn
         list = new ArrayList<SpaceSystem>();
-        //list.add(new SpaceSystem(1076545000876.0, 25, 600, 300, 0, -5));
-        //list.add(new SpaceSystem(1000000000000.0, 50, 500, 300, 3, 13));
-        //list.add(new SpaceSystem(10000091.0, 15, 200, 400, -7, 3));
-        //list.add(new SpaceSystem(3087098471023.0, 34, 400, 100, 0, 0));
+        
+        // preset systems that, when simulated, looks decently interesting
+        //list.add(new SpaceSystem(745000876.0, 25, 600, 300, 2, -10));
+        //list.add(new SpaceSystem(58471023000.0, 50, 500, 300, 0, 0));
+        //list.add(new SpaceSystem(1000090001.0, 15, 200, 400, -7, 3));
+        //list.add(new SpaceSystem(900000012.0, 34, 400, 100, 1, 0));
         
         // creates the arrays that will hold the next frame's changing components
         xVelList = new Double[list.size()];
@@ -86,7 +91,7 @@ public class DrawingPanel extends JPanel
         
         // sets the initial systems - if added by the user - to a negligible mass and radius
         this.mass = Math.pow(1, -10);
-        this.radius = 1;
+        this.radius = 0;
         
         // creates the listener objects
         cListener = new CreationListener();
@@ -198,8 +203,14 @@ public class DrawingPanel extends JPanel
             catch (NullPointerException e) {}
         }
         
-        // draws the magnitude of the velocity as a line that the user has dragged
-        ((Graphics2D) g).drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) dListener.getfX(), (int) dListener.getfY());
+        // checks to see if the velocity magnitude line needs to be drawn
+        if (lineTF)
+        {
+            ((Graphics2D) g).setColor(Color.GREEN);
+            
+            // draws the magnitude of the velocity as a line that the user has dragged
+            ((Graphics2D) g).drawLine((int) cListener.getiX(), (int) cListener.getiY(), (int) dListener.getfX(), (int) dListener.getfY());
+        }
         
         // checks whether to draw the simulation in a state of 'pause' or 'start'
         if (!starter)  // to be activated when the simulation is in a state of 'pause'
@@ -228,8 +239,12 @@ public class DrawingPanel extends JPanel
             }
             catch (InterruptedException e) {}
             
-            // function that is called to calculate the SpaceSystem objects' new centers and new velocities
-            this.calculateNextFrame();
+            // the for loop's purpose is to get precise measuremants and minimize the error for the simulation
+            for (int i = 0; i < this.simTime; i++)
+            {
+                // function that is called to calculate the SpaceSystem objects' new centers and new velocities
+                this.calculateNextFrame();
+            }
         }
         
         
@@ -259,12 +274,12 @@ public class DrawingPanel extends JPanel
             }
             
             // calculates the new center of the SpaceSystem object after a 1 second interval
-            double cenX = list.get(i).getXVal() + list.get(i).getXVelocity() * this.simTime + .5 * (xComp / list.get(i).getMass()) * Math.pow(this.simTime, 2);
-            double cenY = list.get(i).getYVal() + list.get(i).getYVelocity() * this.simTime + .5 * (yComp / list.get(i).getMass()) * Math.pow(this.simTime, 2);
+            double cenX = list.get(i).getXVal() + list.get(i).getXVelocity() * 1 + .5 * (xComp / list.get(i).getMass()) * Math.pow(1, 2);
+            double cenY = list.get(i).getYVal() + list.get(i).getYVelocity() * 1 + .5 * (yComp / list.get(i).getMass()) * Math.pow(1, 2);
             
             // calculates the velocity components of the SpaceSystem object after a 1 second interval
-            double new_velocity_X = (xComp / list.get(i).getMass()) * this.simTime + list.get(i).getXVelocity();
-            double new_velocity_Y = (yComp / list.get(i).getMass()) * this.simTime + list.get(i).getYVelocity();
+            double new_velocity_X = (xComp / list.get(i).getMass()) * 1 + list.get(i).getXVelocity();
+            double new_velocity_Y = (yComp / list.get(i).getMass()) * 1 + list.get(i).getYVelocity();
             
             // adds the components to arrays so as to keep the integrity of the calculations due to instantaneity
             xCentList[i] = cenX;
@@ -342,6 +357,9 @@ public class DrawingPanel extends JPanel
             
             // sets the color to be drawn to black so the temporary circle 'disappears' by blending into the black background of the simulation
             trueFalse = false;
+            
+            // sets the variable to false so the vector magnitude line is not drawn
+            lineTF = false;
         }
         
         /**
@@ -393,6 +411,9 @@ public class DrawingPanel extends JPanel
             
             // changes the velocity label on the control panel
             controls.setVelocityLabel(velocity);
+            
+            // set the color of the velocity magnitude line to be drawn to green
+            lineTF = true;
             
             
             repaint();
