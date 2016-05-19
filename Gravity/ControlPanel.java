@@ -21,6 +21,9 @@ public class ControlPanel extends JPanel
     /** The label that displays the velocity */
     private JLabel displayVel;
     
+    /** The label that displays the time elapsed while the simulation is running */
+    protected JLabel simTime;
+    
     /** The label that states the slider for the the simulation's speed */
     private JLabel simSpeed;
     
@@ -51,6 +54,7 @@ public class ControlPanel extends JPanel
         this.start = new JButton("Start simulation");
         this.stop = new JButton("Pause simulation");
         this.clear = new JButton("Clear systems");
+        this.simTime = new JLabel("Simulation time: 0 seconds");
         this.simSpeed = new JLabel("<html><br>Simulation speed: x1</html>");
         this.slide = new JSlider(0, 25);
         
@@ -69,6 +73,7 @@ public class ControlPanel extends JPanel
         this.add(start);
         this.add(stop);
         this.add(clear);
+        this.add(simTime);
         this.add(simSpeed);
         this.add(slide);
         
@@ -83,7 +88,17 @@ public class ControlPanel extends JPanel
     }
     
     /**
-     * Displays the velocity
+     * Displas the time elapsed while the simulation is running
+     * 
+     * @param  t   the time to be displayed
+     */
+    public void setTimeLabel(int t)
+    {
+        this.simTime.setText("Simulation time: " + t + " seconds");
+    }
+    
+    /**
+     * Displays the velocity of the system
      * 
      * @param  v   the velocity to be displayed
      */
@@ -160,6 +175,8 @@ public class ControlPanel extends JPanel
         {
             panel.setStarter(false);
             panel.clearSystems();
+            panel.resetTime();
+            simTime.setText("Simulation time: 0 seconds");
         }
     }
     

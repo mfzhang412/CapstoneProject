@@ -36,6 +36,16 @@ public class SpaceSystem
     }
     
     /**
+     * Returns the circle representing the SpaceSystem object
+     * 
+     * @return     returns the circle representing the SpaceSystem object
+     */
+    public Ellipse2D.Double getPlanet()
+    {
+        return this.planet;
+    }
+    
+    /**
      * Returns the mass of the SpaceSystem object
      * 
      * @return     returns the mass of the SpaceSystem object

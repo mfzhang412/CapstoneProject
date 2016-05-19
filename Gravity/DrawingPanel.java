@@ -31,8 +31,11 @@ public class DrawingPanel extends JPanel
     protected Double[] xCentList;
     protected Double[] yCentList;
 
-    /** The simulation's speed*/
+    /** The simulation's speed */
     private double simTime = 1.0;
+    
+    /** The time elapsed while the simulation is running */
+    private int displayedTime = 0;
     
     /** The ControlPanel object that allows the user to change the velocity label displayed on the control panel */
     protected ControlPanel controls;
@@ -133,11 +136,19 @@ public class DrawingPanel extends JPanel
     }
     
     /**
+     * Resets the time to be displayed on the control panel
+     */
+    public void resetTime()
+    {
+        this.displayedTime = 0;
+    }
+    
+    /**
      * Clears the SpaceSystem objects from the ArrayList<SpaceSystem> so that the simulation no longer have anything drawn
      */
     public void clearSystems()
     {
-        list = new ArrayList<SpaceSystem>();
+        this.list = new ArrayList<SpaceSystem>();
     }
 
     /**
@@ -159,7 +170,7 @@ public class DrawingPanel extends JPanel
      */
     public ArrayList<SpaceSystem> getSystems()
     {
-        return list;
+        return this.list;
     }
     
     /**
@@ -239,11 +250,17 @@ public class DrawingPanel extends JPanel
             }
             catch (InterruptedException e) {}
             
-            // the for loop's purpose is to get precise measuremants and minimize the error for the simulation
+            // the for loop's purpose is to get precise measuremants and minimize the error for the simulation as well as incrementing the time displayed on the control panel
             for (int i = 0; i < this.simTime; i++)
             {
                 // function that is called to calculate the SpaceSystem objects' new centers and new velocities
                 this.calculateNextFrame();
+                
+                // increments the time to be displayed on the control panel's simulation's time label
+                this.displayedTime += 1;
+                
+                // function that increments the time on the simulation's time interval on the control panel
+                this.controls.setTimeLabel(this.displayedTime);
             }
         }
         
